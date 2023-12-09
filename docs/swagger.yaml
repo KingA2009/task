@@ -1,0 +1,454 @@
+definitions:
+  model.CreateUser:
+    properties:
+      birthdayDate:
+        type: string
+      fullName:
+        type: string
+      location:
+        type: string
+      nickName:
+        type: string
+      password:
+        type: string
+      photo:
+        type: string
+    type: object
+  model.SignInUser:
+    properties:
+      password:
+        type: string
+      phoneNumber:
+        type: string
+    type: object
+  model.UpdateUser:
+    properties:
+      birthdayDate:
+        type: string
+      fullName:
+        type: string
+      location:
+        type: string
+      nickName:
+        type: string
+      password:
+        type: string
+      photo:
+        type: string
+    type: object
+  model.UpdateUsers:
+    properties:
+      birthdayDate:
+        type: string
+      fullName:
+        type: string
+      id:
+        type: string
+      location:
+        type: string
+      nickName:
+        type: string
+      password:
+        type: string
+      photo:
+        type: string
+    type: object
+  response.ResponseModel:
+    properties:
+      code:
+        type: integer
+      description:
+        type: string
+      error:
+        type: string
+      snapData: {}
+      status:
+        type: string
+    type: object
+host: gitlab.com/edu-crm
+info:
+  contact:
+    email: phapp0224mb@gmail.com
+    name: Bakhodir Yashin Mansur
+  description: API Server for EduCRM Application
+  termsOfService: gitlab.com/edu-crm
+  title: EduCRM
+  version: "1.0"
+paths:
+  /api/v1/user/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get User
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+      security:
+      - ApiKeyAuth: []
+      summary: Get User
+      tags:
+      - User
+  /api/v1/user/create:
+    post:
+      consumes:
+      - application/json
+      description: Create User
+      parameters:
+      - description: Create User
+        in: body
+        name: create
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+      security:
+      - ApiKeyAuth: []
+      summary: Create User
+      tags:
+      - User
+  /api/v1/user/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete User
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete User
+      tags:
+      - User
+  /api/v1/user/list:
+    get:
+      consumes:
+      - application/json
+      description: Get User List
+      parameters:
+      - default: 10
+        description: pageSize
+        in: query
+        name: pageSize
+        required: true
+        type: integer
+      - default: 1
+        description: page
+        in: query
+        name: page
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+      security:
+      - ApiKeyAuth: []
+      summary: Get User List
+      tags:
+      - User
+  /api/v1/user/sign-in:
+    post:
+      consumes:
+      - application/json
+      description: Admin Sign In  User.
+      parameters:
+      - description: Sign In
+        in: body
+        name: signup
+        required: true
+        schema:
+          $ref: '#/definitions/model.SignInUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+      summary: Admin Sign In User
+      tags:
+      - User
+  /api/v1/user/sign-up:
+    post:
+      consumes:
+      - application/json
+      description: Sign Up User
+      parameters:
+      - description: Create Super Admin
+        in: body
+        name: create
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+      summary: Sign Up User
+      tags:
+      - User
+  /api/v1/user/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Update User
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update User
+        in: body
+        name: update
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdateUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+      security:
+      - ApiKeyAuth: []
+      summary: Update User
+      tags:
+      - User
+  /api/v1/users/create:
+    post:
+      consumes:
+      - application/json
+      description: Create Users
+      parameters:
+      - description: Create User
+        in: body
+        name: create
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/model.CreateUser'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+      security:
+      - ApiKeyAuth: []
+      summary: Create Users
+      tags:
+      - User
+  /api/v1/users/delete:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Users
+      parameters:
+      - description: User IDs
+        in: body
+        name: id
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Users
+      tags:
+      - User
+  /api/v1/users/update:
+    put:
+      consumes:
+      - application/json
+      description: Update Users
+      parameters:
+      - description: Update Users
+        in: body
+        name: update
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/model.UpdateUsers'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+      security:
+      - ApiKeyAuth: []
+      summary: Update Users
+      tags:
+      - User
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
